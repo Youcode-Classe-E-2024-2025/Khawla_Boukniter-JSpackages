@@ -237,7 +237,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
     </section>
    <?php endif; ?>
-    
+    <!-- Affichage des auteurs -->
+    <section>
+        <h2>Auteurs</h2>
+        <ul>
+            <?php
+                $authors = getAllAuthors();
+                foreach ($authors as $author) {
+                    echo "<li>{$author['nom']} ({$author['email']})</li>";
+                }
+            ?>
+        </ul>
+    </section>
+
+    <!-- Affichage des packages -->
+    <section>
+        <h2>Packages</h2>
+        <ul class="package-list">
+            <?php
+                $packages = getAllPackages();
+                foreach ($packages as $package) {
+                    echo "<li class='package' data-id='{$package['id']}'>{$package['nom']} - {$package['description']}</li>";
+                }
+            ?>
+        </ul>
+    </section>
+
+    <!-- Affichage des versions -->
+    <section>
+        <h2>Versions</h2>
+        <ul class="version-list">
+        </ul>
+    </section>
     <script src="script.js"></script>
 </body>
 </html>
