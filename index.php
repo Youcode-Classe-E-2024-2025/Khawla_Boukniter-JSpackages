@@ -26,6 +26,19 @@ if (isset($_GET['package_id'])) {
     exit;
 }
 
+// Fonctions pour gérer les auteurs
+function getAllAuthors() {
+    global $pdo;
+    $stmt = $pdo->query('SELECT * FROM Auteurs');
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function addAuthor($name, $email) {
+    global $pdo;
+    $stmt = $pdo->prepare("INSERT INTO Auteurs (nom, email) VALUES (?, ?)");
+    $stmt->execute([$name, $email]);
+}
+
 ?>
 
 <!DOCTYPE html>
