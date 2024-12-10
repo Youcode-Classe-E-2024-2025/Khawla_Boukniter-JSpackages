@@ -1,74 +1,101 @@
-        /* Style de base */
-        html {
-            font-size: 100%;
-        }
+/* Style de base */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
+header {
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
 
-        header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        header a {
-            color: white;
-            text-decoration: none;
-        }
+a {
+  margin-left: auto;
+  text-decoration: none;
+  align-self: self-end;
+}
 
-        h1 {
-            margin: 0;
-        }
+h1 {
+  margin: 0;
+}
 
-        section {
-            margin: 20px;
-            margin-left: 27px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+section {
+  margin: 20px;
+  margin-left: 27px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-        h2 {
-            color: #333;
-        }
+h2 {
+  color: #333;
+}
 
-        form input[type="text"],
-        form input[type="email"],
-        form input[type="date"],
-        form textarea,
-        form select {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
+form input[type="text"],
+form input[type="email"],
+form input[type="date"],
+form textarea,
+form select {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
 
-        form input[type="submit"] {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+form input[type="submit"] {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
 
-        form input[type="submit"]:hover {
-            background-color: #555;
-        }
+form input[type="submit"]:hover {
+  background-color: #555;
+}
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-        ul li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
+ul li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+svg {
+  width: 30px;
+}
+
+.package-list li {
+  cursor: pointer;
+  align-items: center;
+  display: flex;
+}
+
+label {
+  margin-right: 6px;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button svg {
+  width: 25px;
+}
+
+button:hover {
+  color: red;
+}
