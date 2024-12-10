@@ -39,6 +39,20 @@ function addAuthor($name, $email) {
     $stmt->execute([$name, $email]);
 }
 
+// Fonctions pour gérer les packages
+function getAllPackages() {
+    global $pdo;
+    $stmt = $pdo->query('SELECT * FROM Packages');
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function addPackage($name, $description) {
+    global $pdo;
+    $stmt = $pdo->prepare("INSERT INTO Packages (nom, description) VALUES (?, ?)");
+    $stmt->execute([$name, $description]);
+}
+
+
 ?>
 
 <!DOCTYPE html>
