@@ -77,24 +77,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = validateInput($_POST['name']);
             $email = validateInput($_POST['email']);
             addAuthor($name, $email);
-            header('Location: index1.php');
+            header('Location: index.php');
             exit;
         } elseif (isset($_POST['add_package'])) {
             $name = validateInput($_POST['package_name']);
             $description = validateInput($_POST['package_description']);
             addPackage($name, $description);
-            header('Location: index1.php');
+            header('Location: index.php');
             exit;
         } elseif (isset($_POST['add_version'])) {
             $package_id = $_POST['package_id'];
             $version_number = $_POST['version_number'];
             addVersion($package_id, $version_number);
-            header('Location: index1.php');
+            header('Location: index.php');
             exit;
         }
     }
     else {
-        header("Location: index1.php");
+        header("Location: index.php");
         exit;
     }
 }
@@ -180,10 +180,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <header>
         <h1>Gestion des Packages JavaScript</h1>
-        
         <a href="logout.php">Déconnexion</a>
-        
     </header>
+    
   <?php if ($is_admin): ?> 
     <!-- Formulaire d'ajout d'auteur -->
     <section>
@@ -269,6 +268,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <ul class="version-list">
         </ul>
     </section>
-    <script src="script.js"></script>
+    <script src="assets/JS/script.js"></script>
 </body>
 </html>
