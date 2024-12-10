@@ -52,7 +52,52 @@ function addPackage($name, $description) {
     $stmt->execute([$name, $description]);
 }
 
+// Fonctions pour gérer les versions
+function getAllVersions() {
+    global $pdo;
+    $stmt = $pdo->query('SELECT * FROM Versions');
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
+function addVersion($package_id, $version_number) {
+    global $pdo;
+    $stmt = $pdo->prepare("INSERT INTO Versions (package_id, version) VALUES (?, ?)");
+    $stmt->execute([$package_id, $version_number]);
+}
+
+// Validation des données
+function validateInput($input) {
+    return htmlspecialchars(trim($input)); // Nettoyage des entrées
+}
+
+// Gestion des formulaires (ajout d'auteur, de package, de version)
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($is_admin) {
+        if (isset($_POST['add_author'])) {
+            $name = validateInput($_POST['name']);
+            $email = validateInput($_POST['email']);
+            addAuthor($name, $email);
+            header('Location: index1.php');
+            exit;
+        } elseif (isset($_POST['add_package'])) {
+            $name = validateInput($_POST['package_name']);
+            $description = validateInput($_POST['package_description']);
+            addPackage($name, $description);
+            header('Location: index1.php');
+            exit;
+        } elseif (isset($_POST['add_version'])) {
+            $package_id = $_POST['package_id'];
+            $version_number = $_POST['version_number'];
+            addVersion($package_id, $version_number);
+            header('Location: index1.php');
+            exit;
+        }
+    }
+    else {
+        header("Location: index1.php");
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
