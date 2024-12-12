@@ -30,6 +30,28 @@ if (isset($_GET['package_id'])) {
     exit;
 }
 
+if (isset($_GET['author_id'])) {
+    $author_id = $_GET['author_id'];
+    $stmt = $pdo->prepare('SELECT * FROM Packages WHERE auteur_id = ?');
+    $stmt->execute([$author_id]);
+    $packages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Important : terminez le script après l'envoi de la réponse JSON
+    echo json_encode($packages);
+    exit;
+}
+
+if (isset($_GET['version_id'])) {
+    // $author_id = $_GET['author_id'];
+    $stmt = $pdo->prepare('SELECT * FROM Versions WHERE id = ?');
+    $stmt->execute([$version_id]);
+    $versions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Important : terminez le script après l'envoi de la réponse JSON
+    echo json_encode($versions);
+    exit;
+}
+
 // Fonctions pour gérer les auteurs
 function getAllAuthors()
 {
@@ -75,6 +97,28 @@ function addVersion($package_id, $version_number)
     $stmt->execute([$package_id, $version_number]);
 }
 
+function deleteAuthor($authId)
+{
+    try {
+        global $pdo;
+
+        // Supprimer les dépendances dans `packages` et `versions`
+        $stmt = $pdo->prepare("DELETE v 
+                       FROM Versions v 
+                       JOIN Packages p ON v.package_id = p.id 
+                       WHERE p.auteur_id = :auteur_id");
+        $stmt->execute([':auteur_id' => $authId]);
+
+        // Supprimer l'auteur
+        $stmt = $pdo->prepare("DELETE FROM Auteurs WHERE id = :auteur_id");
+        $stmt->execute([':auteur_id' => $authId]);
+
+        echo "Auteur et dépendances supprimés avec succès.";
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+}
+
 function deletePackage($packageId)
 {
     try {
@@ -93,19 +137,19 @@ function deletePackage($packageId)
     }
 }
 
-function deleteAuthor($authId)
+function deleteVersion($versionId)
 {
     try {
         global $pdo;
         // Supprimer les dépendances dans `versions`
-        $stmt = $pdo->prepare("DELETE FROM Packages WHERE auteur_id = :auteur_id");
-        $stmt->execute([':auteur_id' => $authId]);
+        // $stmt = $pdo->prepare("DELETE FROM Packages WHERE auteur_id = :auteur_id");
+        // $stmt->execute([':auteur_id' => $versionId]);
 
         // Supprimer le package
-        $stmt = $pdo->prepare("DELETE FROM Auteurs WHERE id = :auteur_id");
-        $stmt->execute([':auteur_id' => $authId]);
+        $stmt = $pdo->prepare("DELETE FROM Versions WHERE id = :version_id");
+        $stmt->execute([':version_id' => $versionId]);
 
-        echo "Auteur et dépendances supprimés avec succès.";
+        echo "Version supprimée avec succès.";
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();
     }
@@ -117,7 +161,7 @@ function validateInput($input)
     return htmlspecialchars(trim($input)); // Nettoyage des entrées
 }
 
-// Gestion des formulaires (ajout d'auteur, de package, de version)
+// Gestion des formulaires (ajout/suppression d'auteur, de package, de version)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($is_admin && isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
         if (isset($_POST['add_author'])) {
@@ -146,6 +190,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } elseif (isset($_POST['delete_author'])) {
             $author_id = validateInput($_POST['author_id']);
             deleteAuthor($author_id);
+            header('Location: index1.php');
+            exit;
+        } elseif (isset($_POST['delete_version'])) {
+            $version_id = validateInput($_POST['version_id']);
+            deleteVersion($version_id);
             header('Location: index1.php');
             exit;
         }
@@ -208,7 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <div><label for="package_name">Nom:</label><input type="text" name="package_name" placeholder="Nom du package" required></div>
-                    <div><label for="package_description">Description:</label><textarea name="package_description" placeholder="Description du package" required></textarea></div>
+                    <div style="display: flex; align-items: center;"><label for="package_description">Description:</label><textarea name="package_description" placeholder="Description du package" required></textarea></div>
                 </div>
                 <input type="submit" name="add_package" value="Ajouter Package">
             </form>
