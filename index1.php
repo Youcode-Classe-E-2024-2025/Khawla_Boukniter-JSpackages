@@ -163,110 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Packages</title>
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
-    <style>
-        /* Style de base */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
-
-        header {
-            display: flex;
-            align-items: center;
-            background-color: #333;
-            color: white;
-            padding: 20px;
-        }
-
-        a {
-            margin-left: auto;
-            text-decoration: none;
-            align-self: self-end;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        section {
-            margin: 20px;
-            margin-left: 27px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            color: #333;
-        }
-
-        form input[type="text"],
-        form input[type="email"],
-        form input[type="date"],
-        form textarea,
-        form select {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        form input[type="submit"] {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        form input[type="submit"]:hover {
-            background-color: #555;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        svg {
-            width: 30px;
-        }
-
-        li {
-            cursor: pointer;
-            align-items: center;
-            display: flex;
-        }
-
-        label {
-            margin-right: 6px;
-        }
-
-        button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-        }
-
-        button svg {
-            width: 20px;
-        }
-
-        button:hover {
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/CSS/style.css">
 </head>
 
 <body>
@@ -403,7 +300,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <li>Choisissez un package pour afficher ses versions</li>
         </ul>
     </section>
-    <script src="script.js"></script>
+    <script src="assets/JS/script.js"></script>
 </body>
 
 </html>
