@@ -28,9 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="assets/CSS/login.css">
 </head>
 
 <body>
+    <header>
+        <h1>Gestion des Packages JavaScript</h1>
+    </header>
     <h1>Login</h1>
     <form method="POST">
         <label for="username">Nom d'utilisateur:</label>
