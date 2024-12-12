@@ -93,6 +93,24 @@ function deletePackage($packageId)
     }
 }
 
+function deleteAuthor($authId)
+{
+    try {
+        global $pdo;
+        // Supprimer les dépendances dans `versions`
+        $stmt = $pdo->prepare("DELETE FROM Packages WHERE auteur_id = :auteur_id");
+        $stmt->execute([':auteur_id' => $authId]);
+
+        // Supprimer le package
+        $stmt = $pdo->prepare("DELETE FROM Auteurs WHERE id = :auteur_id");
+        $stmt->execute([':auteur_id' => $authId]);
+
+        echo "Auteur et dépendances supprimés avec succès.";
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+}
+
 // Validation des données
 function validateInput($input)
 {
@@ -125,6 +143,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             deletePackage($package_id);
             header('Location: index1.php');
             exit;
+        } elseif (isset($_POST['delete_author'])) {
+            $author_id = validateInput($_POST['author_id']);
+            deleteAuthor($author_id);
+            header('Location: index1.php');
+            exit;
         }
     } else {
         header("Location: index1.php");
@@ -140,8 +163,110 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Packages</title>
-    <link rel="stylesheet" href="assets/CSS/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <style>
+        /* Style de base */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
 
+        header {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+
+        a {
+            margin-left: auto;
+            text-decoration: none;
+            align-self: self-end;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        section {
+            margin: 20px;
+            margin-left: 27px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="date"],
+        form textarea,
+        form select {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        form input[type="submit"] {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        svg {
+            width: 30px;
+        }
+
+        li {
+            cursor: pointer;
+            align-items: center;
+            display: flex;
+        }
+
+        label {
+            margin-right: 6px;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        button svg {
+            width: 20px;
+        }
+
+        button:hover {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -229,7 +354,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <form method='POST' style='display:inline;'>
                             <input type='hidden' name='csrf_token' value='{$_SESSION['csrf_token']}'>
                             <input type='hidden' name='author_id' value='{$author['id']}'>
-                            <button type='submit' name='delete_author'>
+                            <button type='submit' name='delete_author' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cet auteur ?\")'>
                                 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor' width='20px' class='size-5'>
                                     <path fill-rule='evenodd' d='M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z' clip-rule='evenodd' />
                                 </svg>
