@@ -42,7 +42,7 @@ if (isset($_GET['author_id'])) {
 }
 
 if (isset($_GET['version_id'])) {
-    // $author_id = $_GET['author_id'];
+    $version_id = $_GET['version_id'];
     $stmt = $pdo->prepare('SELECT * FROM Versions WHERE id = ?');
     $stmt->execute([$version_id]);
     $versions = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -102,11 +102,12 @@ function deleteAuthor($authId)
     try {
         global $pdo;
 
-        // Supprimer les dépendances dans `packages` et `versions`
-        $stmt = $pdo->prepare("DELETE v 
-                       FROM Versions v 
-                       JOIN Packages p ON v.package_id = p.id 
-                       WHERE p.auteur_id = :auteur_id");
+        // Supprimer les dépendances dans `versions`
+        $stmt = $pdo->prepare("DELETE FROM Versions WHERE package_id IN (SELECT id FROM Packages WHERE auteur_id = :auteur_id)");
+        $stmt->execute([':auteur_id' => $authId]);
+
+        // Supprimer les packages associés
+        $stmt = $pdo->prepare("DELETE FROM Packages WHERE auteur_id = :auteur_id");
         $stmt->execute([':auteur_id' => $authId]);
 
         // Supprimer l'auteur
@@ -349,6 +350,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <li>Choisissez un package pour afficher ses versions</li>
         </ul>
     </section>
+
+    <script type="text/javascript">
+        var isAdmin = <?php echo (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true) ? 'true' : 'false'; ?>;
+    </script>
+
     <script src="assets/JS/script.js"></script>
 </body>
 

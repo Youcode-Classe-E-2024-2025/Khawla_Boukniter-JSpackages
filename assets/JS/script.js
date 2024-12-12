@@ -1,19 +1,22 @@
-const isAdmin = true; // Remplacez par une condition réelle selon votre application
+// const isAdmin = true; // Remplacez par une condition réelle selon votre application
 
-const authBtn = document.querySelector('input[name="add_author"]');
-authBtn.addEventListener('click', function () {
-    document.querySelector('.auteur-fields').style = "display: block";
-});
+if (isAdmin) {
+    const authBtn = document.querySelector('input[name="add_author"]');
+    authBtn.addEventListener('click', function () {
+        document.querySelector('.auteur-fields').style = "display: block";
+    });
 
-const packBtn = document.querySelector('input[name="add_package"]');
-packBtn.addEventListener('click', function () {
-    document.querySelector('.package-fields').style = "display: block";
-});
+    const packBtn = document.querySelector('input[name="add_package"]');
+    packBtn.addEventListener('click', function () {
+        document.querySelector('.package-fields').style = "display: block";
+    });
 
-const versionBtn = document.querySelector('input[name="add_version"]');
-versionBtn.addEventListener('click', function () {
-    document.querySelector('.version-fields').style = "display: block";
-});
+    const versionBtn = document.querySelector('input[name="add_version"]');
+    versionBtn.addEventListener('click', function () {
+        document.querySelector('.version-fields').style = "display: block";
+    });
+}
+
 
 const packageList = document.querySelector('.package-list');
 const versionList = document.querySelector('.version-list');

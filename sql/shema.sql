@@ -60,3 +60,17 @@ VALUES
     ('1.1.0', '2023-10-05', 7),
     ('1.0.0', '2023-06-15', 8),
     ('1.1.0', '2023-11-20', 8);
+
+ALTER TABLE versions
+DROP FOREIGN KEY versions_ibfk_1,
+ADD CONSTRAINT versions_ibfk_1
+FOREIGN KEY (Package_id) REFERENCES packages(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+ALTER TABLE Versions 
+Drop FOREIGN KEY fk_package,
+ADD CONSTRAINT fk_package 
+FOREIGN KEY (package_id) REFERENCES Packages(id) 
+ON DELETE CASCADE
+ON UPDATE CASCADE;
