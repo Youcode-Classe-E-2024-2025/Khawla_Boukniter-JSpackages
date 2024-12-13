@@ -29,9 +29,9 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur v
 1. **Cloner le repository**  
    Clonez ce repository sur votre machine locale :
    ```bash
-   git clone https://github.com/yourusername/gestion-packages.git
-   cd gestion-packages
-   
+   git clone https://github.com/yourusername/Youcode-Classe-E-2024-2025/Khawla_Boukniter-Package.git
+   cd Khawla_Boukniter-Package
+
 ## Configurer le serveur local (XAMPP/MAMP)
 
 1. **Lancez XAMPP ou MAMP**  
