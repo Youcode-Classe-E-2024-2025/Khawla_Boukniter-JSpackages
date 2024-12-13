@@ -351,6 +351,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </ul>
     </section>
 
+    <footer id="footer">
+        <div>
+            <p>JSPackage</p>
+        </div>
+
+        <div>
+            © 2024 JSPackage. All rights reserved.
+        </div>
+    </footer>
+
     <script type="text/javascript">
         var isAdmin = <?php echo (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true) ? 'true' : 'false'; ?>;
     </script>

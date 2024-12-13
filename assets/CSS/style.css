@@ -1,4 +1,8 @@
 /* Style de base */
+html {
+    font-size: 16px;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -11,7 +15,7 @@ header {
     align-items: center;
     background-color: #333;
     color: white;
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 a {
@@ -24,12 +28,12 @@ h1 {
 }
 
 section {
-    margin: 20px;
-    margin-left: 27px;
-    padding: 20px;
+    margin: 1.25rem;
+    margin-left: 1.6875rem;
+    padding: 1.25rem;
     background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 0.3125rem;
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -42,19 +46,19 @@ form input[type="date"],
 form textarea,
 form select {
     width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 0.625rem;
+    margin: 0.625rem 0;
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.3125rem;
 }
 
 form input[type="submit"] {
     background-color: #333;
     color: white;
-    padding: 10px;
+    padding: 0.625rem;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
 }
 
 form input[type="submit"]:hover {
@@ -67,12 +71,12 @@ ul {
 }
 
 ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 0.625rem;
+    border-bottom: 0.0625rem solid #ddd;
 }
 
 svg {
-    width: 30px;
+    width: 1.875rem;
 }
 
 li {
@@ -82,7 +86,7 @@ li {
 }
 
 label {
-    margin-right: 6px;
+    margin-right: 0.375rem;
 }
 
 button {
@@ -92,9 +96,27 @@ button {
 }
 
 button svg {
-    width: 20px;
+    width: 1.25rem;
 }
 
 button:hover {
     color: red;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+footer li {
+    border-bottom: none;
+    color: white;
+}
+
+footer p {
+    margin: 0.625rem;
+    font-weight: 600;
+    font-size: 2rem;
 }
