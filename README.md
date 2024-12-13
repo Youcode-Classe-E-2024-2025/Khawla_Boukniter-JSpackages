@@ -17,11 +17,47 @@ Ce projet permet la gestion d'auteurs, de packages et de versions de packages Ja
 - JavaScript pour interactivité dynamique
 
 ## Installation
-1. Clonez ce repository sur votre machine locale.
-2. Assurez-vous d'avoir un serveur local comme XAMPP ou MAMP avec PHP et MySQL.
-3. Créez une base de données `gestion` dans MySQL et exécutez les scripts SQL fournis pour créer les tables.
-4. Modifiez les paramètres de connexion dans le fichier PHP si nécessaire.
-5. Ouvrez le projet dans votre navigateur et accédez à `index1.php`.
+
+### Prérequis
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur votre machine :
+- [XAMPP](https://www.apachefriends.org/index.html) ou [MAMP](https://www.mamp.info/en/) pour configurer le serveur local avec PHP et MySQL.
+- Un éditeur de texte comme [Visual Studio Code](https://code.visualstudio.com/).
+- Un navigateur web moderne pour tester l'application.
+
+### Étapes de configuration
+
+1. **Cloner le repository**  
+   Clonez ce repository sur votre machine locale :
+   ```bash
+   git clone https://github.com/yourusername/gestion-packages.git
+   cd gestion-packages
+   
+## Configurer le serveur local (XAMPP/MAMP)
+
+1. **Lancez XAMPP ou MAMP**  
+   - Téléchargez et installez [XAMPP](https://www.apachefriends.org/index.html) ou [MAMP](https://www.mamp.info/en/).
+   - Ouvrez le programme et démarrez les services **Apache** et **MySQL**.
+
+2. **Accédez au répertoire htdocs**  
+   - Dans **XAMPP**, le répertoire par défaut se trouve dans `C:\xampp\htdocs`.
+   - Dans **MAMP**, le répertoire se trouve dans `Applications/MAMP/htdocs`.
+   - Placez-y le projet cloné.
+
+## Configurer la base de données
+
+1. **Ouvrez phpMyAdmin**  
+   - Dans votre navigateur, accédez à l'URL suivante pour ouvrir **phpMyAdmin** :  
+     `http://localhost/phpmyadmin`.
+
+2. **Créez une nouvelle base de données**  
+   - Cliquez sur l'option **"Bases de données"** dans le menu supérieur de phpMyAdmin.
+   - Entrez le nom de la base de données, par exemple `gestion`, et cliquez sur **"Créer"**.
+
+3. **Importez les fichiers SQL**  
+   - Accédez à l'onglet **"Importer"** de phpMyAdmin.
+   - Cliquez sur **"Choisir un fichier"** et sélectionnez les fichiers SQL fournis dans le dossier `sql/` du projet pour créer les tables nécessaires.
+   - Cliquez sur **"Exécuter"** pour importer les fichiers et créer les tables.
+
 
 ## Tables de la Base de Données
 Voici les scripts SQL pour créer les tables nécessaires à la gestion des packages :
