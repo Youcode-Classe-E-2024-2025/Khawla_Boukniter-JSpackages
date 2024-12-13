@@ -15,13 +15,12 @@ header {
 }
 
 a {
-    margin-left: auto;
     text-decoration: none;
     align-self: self-end;
 }
 
 h1 {
-    margin: 0;
+    margin: auto;
 }
 
 section {
